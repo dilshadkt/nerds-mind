@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.09);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 20;
+  }
+}
+
+.scale-up {
+  animation: scaleUp 25s ease-in-out infinite;
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: -10px 0 20px #1ac4fa00, 0 0 20px #1ac4fa00,
+      10px 0 20px #1ac4fa00;
+  }
+  50% {
+    text-shadow: -10px 0 20px #1ac4fa, 0 0 20px #1ac4fa, 10px 0 20px #1ac4fa;
+  }
+  100% {
+    text-shadow: -10px 0 20px #1ac4fa00, 0 0 20px #1ac4fa00,
+      10px 0 20px #1ac4fa00;
+  }
+}
+
+.smooth-up-down {
+  animation: upDown 3s ease-in-out infinite;
+}
+
+@keyframes upDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* For Chrome, Safari, Edge, and Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
