@@ -113,7 +113,7 @@ const sendEmailWithAttachment = async (pdfBlob, userData) => {
       },
     });
 
-    console.log("Email sent successfully:", emailResponse);
+    // console.log("Email sent successfully:", emailResponse);
     return emailResponse;
   } catch (error) {
     console.error("Error sending email:", error);
