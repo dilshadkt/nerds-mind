@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import FadeLoader from "react-spinners/FadeLoader";
 const TableRow = ({ index, row, handleStatus }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const status = ["Confirmed", "Cancelled"];
@@ -49,7 +49,8 @@ const TableRow = ({ index, row, handleStatus }) => {
       <td
         className={`py-5 px-3 relative   text-xs font-normal border-t whitespace-nowrap`}
       >
-        <span
+        <button
+          disabled={row.RegStatus === "Loading"}
           onClick={() => setMenuOpen(true)}
           className={` relative z-0 cursor-pointer ${
             row.RegStatus === "Registread"
@@ -59,8 +60,8 @@ const TableRow = ({ index, row, handleStatus }) => {
               : `bg-red-300 text-red-600`
           }   px-2 py-1 rounded-lg`}
         >
-          {row.RegStatus}
-        </span>
+          {row.RegStatus === "Loading" ? `sending...` : row.RegStatus}
+        </button>
 
         <div
           ref={menuRef}

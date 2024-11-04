@@ -22,7 +22,7 @@ html {
   animation: scaleUp 25s ease-in-out infinite;
 }
 
-@keyframes textGlow {
+/* @keyframes textGlow {
   0% {
     text-shadow: -10px 0 20px #1ac4fa00, 0 0 20px #1ac4fa00,
       10px 0 20px #1ac4fa00;
@@ -34,9 +34,9 @@ html {
     text-shadow: -10px 0 20px #1ac4fa00, 0 0 20px #1ac4fa00,
       10px 0 20px #1ac4fa00;
   }
-}
+} */
 
-.smooth-up-down {
+/* .smooth-up-down {
   animation: upDown 3s ease-in-out infinite;
 }
 
@@ -50,7 +50,7 @@ html {
   100% {
     transform: translateY(0);
   }
-}
+} */
 
 /* For Chrome, Safari, Edge, and Opera */
 input[type="number"]::-webkit-outer-spin-button,

@@ -1,7 +1,16 @@
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { customeAxios } from "./axios";
-export const generateAndSendPDF = async (values, entryPassRef) => {
+import toast from "react-hot-toast";
+export const generateAndSendPDF = async (
+  values,
+  entryPassRef,
+  setData,
+  setFilteredData,
+  data,
+  id,
+  status
+) => {
   const entryPassElement = entryPassRef.current;
   if (!entryPassElement) {
     console.error("Entry pass component not found");
@@ -89,7 +98,15 @@ export const generateAndSendPDF = async (values, entryPassRef) => {
     // pdf.save("EntryPass.pdf");
     // Convert PDF to Blob and send as email attachment
     const pdfBlob = pdf.output("blob");
-    await sendEmailWithAttachment(pdfBlob, values);
+    await sendEmailWithAttachment(
+      pdfBlob,
+      values,
+      setData,
+      setFilteredData,
+      data,
+      id,
+      status
+    );
   } catch (error) {
     console.error("Error generating PDF:", error);
     throw error;
@@ -98,7 +115,15 @@ export const generateAndSendPDF = async (values, entryPassRef) => {
   }
 };
 
-const sendEmailWithAttachment = async (pdfBlob, userData) => {
+const sendEmailWithAttachment = async (
+  pdfBlob,
+  userData,
+  setData,
+  setFilteredData,
+  data,
+  id,
+  status
+) => {
   try {
     // Create FormData and append only the PDF file
     const formData = new FormData();
@@ -112,12 +137,27 @@ const sendEmailWithAttachment = async (pdfBlob, userData) => {
         EmailID: userData.EmailID,
       },
     });
-
+    const updatedData = data.map((data) =>
+      Number(data.RegistrationID) === Number(id)
+        ? { ...data, RegStatus: status }
+        : data
+    );
+    toast.success("Status changed");
+    setFilteredData(updatedData);
+    setData(updatedData);
     // console.log("Email sent successfully:", emailResponse);
     return emailResponse;
   } catch (error) {
+    const updatedData = data.map((data) =>
+      Number(data.RegistrationID) === Number(id)
+        ? { ...data, RegStatus: "Cancelled" }
+        : data
+    );
+    setFilteredData(updatedData);
+    setData(updatedData);
     console.error("Error sending email:", error);
-    throw error;
+    toast.error("Email failed. Please verify the email address");
+    // throw error;
   }
 };
 

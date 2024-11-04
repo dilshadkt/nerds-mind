@@ -50,8 +50,18 @@ const UserData = () => {
   };
 
   const handleStatus = async (id, status, value) => {
+    // set values and id for the entry pass
     setValues(value);
     setRegiterId(value.UniqueID);
+    // updated the value for the loading state
+    const updatedData = data.map((data) =>
+      Number(data.RegistrationID) === Number(id)
+        ? { ...data, RegStatus: "Loading" }
+        : data
+    );
+    setFilteredData(updatedData);
+    setData(updatedData);
+    // api for change the status
     try {
       const response = await customeAxios.post(
         "/UpdateRegistartionStatus",
@@ -64,19 +74,30 @@ const UserData = () => {
           },
         }
       );
-      const updatedData = filteredData.map((data) =>
-        Number(data.RegistrationID) === Number(id)
-          ? { ...data, RegStatus: status }
-          : data
-      );
-      toast.success("Status changed");
-      setFilteredData(updatedData);
-      setData(updatedData);
+      // if status is cancelled , in that case we dont need to generate and send so make ui changes from here
+      if (status === "Cancelled") {
+        const updatedData = data.map((data) =>
+          Number(data.RegistrationID) === Number(id)
+            ? { ...data, RegStatus: status }
+            : data
+        );
+        toast.success("Status changed");
+        setFilteredData(updatedData);
+        setData(updatedData);
+      }
+      // if status is confirmed we pass the function to modify the ui changes
       if (status === "Confirmed") {
-        await generateAndSendPDF(value, entryPassRef);
+        await generateAndSendPDF(
+          value,
+          entryPassRef,
+          setData,
+          setFilteredData,
+          data,
+          id,
+          status
+        );
       }
     } catch (error) {
-      console.log(error);
       toast.success(error || "Failed to changes");
     }
   };
@@ -171,7 +192,7 @@ const UserData = () => {
                 <StatusSelect value={status} onChange={handleStatusChange} />
                 <form className="w-full ">
                   <label
-                    for="default-search"
+                    htmlFor="default-search"
                     className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
                   >
                     Search
@@ -187,9 +208,9 @@ const UserData = () => {
                       >
                         <path
                           stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                         />
                       </svg>
@@ -251,6 +272,7 @@ const UserData = () => {
                   <tbody>
                     {rowsToShow.map((row, index) => (
                       <TableRow
+                        key={index}
                         index={index}
                         row={row}
                         handleStatus={handleStatus}
