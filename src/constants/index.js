@@ -59,7 +59,7 @@ export const timelineData = [
     position: "right",
     icon: Five,
     author: "Jayadev Vasantham",
-    role: "CTO, IndustryApps, India",
+    role: "CTO, IndustryApps, Singapore",
   },
   {
     id: 6,
@@ -111,7 +111,7 @@ export const timelineData = [
 export const profileMemberes = [
   {
     name: "Jayadev Vasantham",
-    cmpny: "IndustryApps",
+    cmpny: "IndustryApps, Singapore",
     role: "Chief Technology Officer",
     desc: "Jayadev Vasantham, Chief Technology Officer at IndustryApps and former Chief Digital Officer of Geojit, is a seasoned technology leader with over 20 years of experience. Known for his innovative approach, he has spearheaded the delivery of a next-generation Dataspace and operating system for manufacturing domain, integrating AI-driven insights and Industry 4.0 standards.",
     image: person7,
@@ -125,7 +125,7 @@ export const profileMemberes = [
   },
   {
     name: "Satheesan I K",
-    cmpny: "Wriox Infotech",
+    cmpny: "Wriox Infotech, Dubai",
     role: "Chief Technology Officer",
     desc: "Mr. Satheesan I K, Chief Technology Officer at Wriox Infotech in Dubai, UAE, brings over 28 years of experience in IT, including 20+ years specializing in backup, disaster recovery, and business continuity. A recognized expert in both virtual and physical datacenter management across cloud and hybrid environments, he holds certifications such as Microsoft Azure Solutions Architect Expert, VMware VCP5-DCV, Red Hat Certified Engineer, Cisco CCNA, and ITIL Foundation.",
     image: person3,

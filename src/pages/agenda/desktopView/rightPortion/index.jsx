@@ -21,7 +21,7 @@ flex items-center justify-center font-semibold text-xl border-white  text-white"
         </div>
       </div>
       <div className="flex mt-6 flex-col items-center md:items-start md:w-8/12">
-        <h1 className="focus:outline-none capitalize text-xl font-medium leading-5 text-gray-900">
+        <h1 className="focus:outline-none  leading-8 capitalize text-xl font-medium  text-gray-900">
           Registration
         </h1>
         <h2 className="focus:outline-none text-gray-800 mt-3 text-base leading-6 tracking-wide font-mono">
@@ -59,7 +59,7 @@ flex items-center justify-center font-semibold text-xl border-white  text-white"
         </div>
       </div>
       <div className="flex mt-6 flex-col items-center md:items-start md:w-8/12">
-        <h1 className="focus:outline-none capitalize text-xl font-medium leading-5 text-gray-900">
+        <h1 className="focus:outline-none  leading-8 capitalize text-xl font-medium  text-gray-900">
           Intro - NerdzMinds
         </h1>
         <h2 className="focus:outline-none text-gray-800 mt-3 text-base leading-6 tracking-wide font-mono">
@@ -103,14 +103,14 @@ flex items-center justify-center font-semibold text-xl border-white  text-white"
         </div>
       </div>
       <div className="flex mt-6 flex-col items-center md:items-start md:w-8/12">
-        <h1 className="focus:outline-none capitalize text-xl font-medium leading-5 text-gray-900">
+        <h1 className="focus:outline-none  leading-8 capitalize text-xl font-medium  text-gray-900">
           Generative AI in Action: Real-World Use Cases and Applications
         </h1>
         <h2 className="focus:outline-none text-gray-800 mt-3 text-base leading-6 tracking-wide font-mono">
           Jayadev Vasantham
         </h2>
         <h2 className="focus:outline-none text-gray-800 mt-3 text-base leading-6 tracking-wide font-mono">
-          CTO, IndustryApps, India
+          CTO, IndustryApps, Singapore
         </h2>
         <h2 className="focus:outline-none text-gray-800 mt-3 text-base leading-6 tracking-wide font-mono">
           [11:00 AM - 11:40 AM]
@@ -147,7 +147,7 @@ flex items-center justify-center font-semibold text-xl border-white  text-white"
         </div>
       </div>
       <div className="flex mt-6 flex-col items-center md:items-start md:w-8/12">
-        <h1 className="focus:outline-none capitalize text-xl font-medium leading-5 text-gray-900">
+        <h1 className="focus:outline-none  leading-8 capitalize text-xl font-medium  text-gray-900">
           Lunch
         </h1>
         <h2 className="focus:outline-none text-gray-800 mt-3 text-base leading-6 tracking-wide font-mono">
@@ -186,7 +186,7 @@ flex items-center justify-center font-semibold text-xl border-white  text-white"
         </div>
       </div>
       <div className="flex mt-6 flex-col items-center md:items-start md:w-8/12">
-        <h1 className="focus:outline-none capitalize text-xl font-medium leading-5 text-gray-900">
+        <h1 className="focus:outline-none  leading-8 capitalize text-xl font-medium  text-gray-900">
           Vote of Thanks
         </h1>
         <h2 className="focus:outline-none text-gray-800 mt-3 text-base leading-6 tracking-wide font-mono">

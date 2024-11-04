@@ -12,7 +12,8 @@ const StatusSelect = ({ value, onChange }) => {
                  appearance-none focus:outline-none
                  cursor-pointer"
       >
-        <option value="">Filtered By</option>
+        <option value="all">All</option>
+        <option value="registread">Registered</option>
         <option value="confirmed">Confirmed</option>
         <option value="Cancelled">Cancelled</option>
         <option value="attended">Attended</option>

@@ -46,7 +46,7 @@ const LeftPortion = () => {
         </div>
       </div>
       <div className="flex mt-6 flex-col items-center lg:items-end md:w-8/12">
-        <h1 className="focus:outline-none capitalize text-xl font-medium leading-5 text-gray-900">
+        <h1 className="focus:outline-none leading-8  capitalize text-xl font-medium  text-gray-900">
           welcome speech
         </h1>
         <h2 className="focus:outline-none text-gray-800 mt-3 pl-3 text-center md:text-left text-base font-mono leading-6 tracking-wide">
@@ -88,7 +88,7 @@ const LeftPortion = () => {
         4
       </div>
       <div className="flex mt-8 flex-col items-center lg:items-end md:w-8/12">
-        <h1 className="focus:outline-none text-xl font-medium leading-5 text-gray-900">
+        <h1 className="focus:outline-none leading-8  text-right text-xl font-medium  text-gray-900">
           AI Uncovered: Introduction to Artificial Intelligence
         </h1>
         <h2 className="focus:outline-none text-gray-800 mt-3 pl-3 text-center md:text-left text-base font-mono leading-6 tracking-wide">
@@ -130,7 +130,7 @@ const LeftPortion = () => {
         6
       </div>
       <div className="flex mt-8 flex-col items-center lg:items-end md:w-8/12">
-        <h1 className="focus:outline-none text-xl  leading-6 text-right lfont-medium  text-gray-900">
+        <h1 className="focus:outline-none leading-8  text-xl   text-right font-medium  text-gray-900">
           Bridging the Gap between Academic Learning and Industry Readiness
         </h1>
         <h2 className="focus:outline-none text-gray-800 mt-3 pl-3 text-center md:text-left text-base font-mono leading-6 tracking-wide">
@@ -172,7 +172,7 @@ const LeftPortion = () => {
         8
       </div>
       <div className="flex mt-8 flex-col items-center lg:items-end md:w-8/12">
-        <h1 className="focus:outline-none text-xl text-right leading-6 font-medium  text-gray-900">
+        <h1 className="focus:outline-none leading-8  text-xl text-right  font-medium  text-gray-900">
           Cloud and New Generation Data Centers
         </h1>
         <h2 className="focus:outline-none text-gray-800 mt-3 pl-3 text-center md:text-left text-base font-mono leading-6 tracking-wide">
@@ -214,7 +214,7 @@ const LeftPortion = () => {
         10
       </div>
       <div className="flex mt-8 flex-col items-center lg:items-end md:w-8/12">
-        <h1 className="focus:outline-none text-xl text-right leading-6 font-medium  text-gray-900">
+        <h1 className="focus:outline-none leading-8  text-xl text-right  font-medium  text-gray-900">
           Hands-On with AI: Practical Insights and Interactive Discussion
         </h1>
         <h2 className="focus:outline-none text-gray-800 mt-3 pl-3 text-center md:text-left text-base font-mono leading-6 tracking-wide">

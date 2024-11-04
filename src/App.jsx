@@ -8,7 +8,24 @@ import Login from "./pages/register";
 import { Toaster } from "react-hot-toast";
 import Confirmation from "./pages/confirmation";
 import UserData from "./pages/userData";
+import { useEffect } from "react";
 function App() {
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      const isHidden = document.hidden;
+      document.querySelectorAll(".scale-up, .smooth-up-down").forEach((el) => {
+        el.style.animationPlayState = isHidden ? "paused" : "running";
+      });
+    };
+
+    // Add the event listener
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // Cleanup function to remove the event listener on unmount
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
   return (
     <>
       <LoadingProvider>

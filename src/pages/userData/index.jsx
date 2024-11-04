@@ -161,16 +161,16 @@ const UserData = () => {
 
     updateRowsToShow(currentPage); // Adjust currentPage if needed
   }, [data, rowsLimit, currentPage]);
-
+  console.log(filteredData);
   const [status, setStatus] = useState("");
   const handleStatusChange = (e) => {
-    if (e.target.value.length === 0) {
+    setStatus(e.target.value);
+    if (e.target.value === "all") {
       setFilteredData(data);
     } else if (e.target.value === "attended") {
       const filtered = data.filter((data) => data.HasAttended === true);
       setFilteredData(filtered);
     } else {
-      setStatus(e.target.value);
       const filtered = data.filter(
         (data) => data.RegStatus.toLowerCase() === e.target.value.toLowerCase()
       );
