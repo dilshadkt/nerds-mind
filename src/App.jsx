@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import Confirmation from "./pages/confirmation";
 import UserData from "./pages/userData";
 import { useEffect } from "react";
+import ScanUser from "./pages/scan";
 function App() {
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -39,6 +40,7 @@ function App() {
               <Route path="/auth/login" element={<Login />} />
               <Route path="/confirm" element={<Confirmation />} />
               <Route path="/user-data" element={<UserData />} />
+              <Route path="/scan" element={<ScanUser />} />
             </Route>
           </Routes>
         </Router>

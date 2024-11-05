@@ -39,6 +39,16 @@ const HomePage = () => {
               src="https://tuk-cdn.s3.amazonaws.com/can-uploader/center_aligned_with_image-svg3.svg"
               alt="bg"
             />
+            <div className="absolute top-24 right-5 p-4 rounded-lg bg-white/10 backdrop-blur-md">
+              <ul className="text-white font-mono text-sm md:text-base flex flex-col gap-y-2">
+                <li>
+                  📅 <span className="ml-1">9th November 2024</span>
+                </li>
+                <li>
+                  🕗 <span className="ml-1">9:00 AM</span>
+                </li>
+              </ul>
+            </div>
             <div
               className="z-50 w-full bottom-0 top-0  my-auto
              flex flex-col justify-center items-center md:items-start   absolute left-0 md:left-16 

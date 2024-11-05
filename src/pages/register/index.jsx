@@ -71,7 +71,6 @@ const Login = () => {
     FoodType: Yup.string().required("Please select your food preference"),
   });
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    console.log(values);
     const collegeId =
       colleges.filter((college) => college.CollegeName === values.CollegeID)[0]
         ?.CollegeID || null;

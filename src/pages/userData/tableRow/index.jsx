@@ -50,13 +50,15 @@ const TableRow = ({ index, row, handleStatus }) => {
         className={`py-5 px-3 relative   text-xs font-normal border-t whitespace-nowrap`}
       >
         <button
-          disabled={row.RegStatus === "Loading"}
+          disabled={row.RegStatus === "Loading" || row.RegStatus === "Attended"}
           onClick={() => setMenuOpen(true)}
           className={` relative z-0 cursor-pointer ${
             row.RegStatus === "Registread"
               ? `bg-blue-300 text-blue-600`
               : row.RegStatus === "Confirmed"
               ? `bg-green-300 text-green-600`
+              : row.RegStatus === "Attended"
+              ? `bg-white/60 text-gray-500 font-medium cursor-text`
               : `bg-red-300 text-red-600`
           }   px-2 py-1 rounded-lg`}
         >

@@ -95,7 +95,7 @@ export const generateAndSendPDF = async (
       "FAST"
     );
 
-    // pdf.save("EntryPass.pdf");
+    pdf.save("EntryPass.pdf");
     // Convert PDF to Blob and send as email attachment
     const pdfBlob = pdf.output("blob");
     await sendEmailWithAttachment(

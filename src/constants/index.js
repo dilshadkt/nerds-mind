@@ -118,7 +118,7 @@ export const profileMemberes = [
   },
   {
     name: "Sankaran PV",
-    cmpny: null,
+    cmpny: "RSA India Pvt",
     role: "Senior Engineering Manager",
     desc: "Sankaran P V is a seasoned Senior Engineering Manager with over 24 years of experience in engineering leadership, including 10+ years in team management, product development, and technical management. Currently at RSA in Bangalore, he has led numerous global releases for major companies like RSA, EFI, SHARP, and WIPRO, consistently delivering high-quality solutions on schedule.",
     image: person2,

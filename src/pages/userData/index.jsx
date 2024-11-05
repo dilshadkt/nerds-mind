@@ -22,6 +22,7 @@ const UserData = () => {
   const entryPassRef = useRef();
   const [registerId, setRegiterId] = useState(null);
   const [values, setValues] = useState({});
+  const [status, setStatus] = useState("all");
   const updateRowsToShow = (page) => {
     const startIndex = page * rowsLimit;
     const endIndex = startIndex + rowsLimit;
@@ -102,9 +103,10 @@ const UserData = () => {
     }
   };
   const handleSearch = (e) => {
+    console.log(status);
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
-    const filtered =
+    let filtered =
       query === ""
         ? data
         : data.filter(
@@ -113,7 +115,13 @@ const UserData = () => {
                 row.ParticipantName.toLowerCase().includes(query)) ||
               (row.CollegeName && row.CollegeName.toLowerCase().includes(query))
           );
-
+    if (status !== "all") {
+      console.log(filtered);
+      console.log(status);
+      filtered = filtered.filter(
+        (item) => item.RegStatus.toLowerCase() === status.toLowerCase()
+      );
+    }
     setFilteredData(filtered);
     setTotalPage(Math.ceil(filtered.length / rowsLimit));
     setCurrentPage(0);
@@ -161,8 +169,7 @@ const UserData = () => {
 
     updateRowsToShow(currentPage); // Adjust currentPage if needed
   }, [data, rowsLimit, currentPage]);
-  console.log(filteredData);
-  const [status, setStatus] = useState("");
+
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
     if (e.target.value === "all") {
