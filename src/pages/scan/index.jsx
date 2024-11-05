@@ -161,7 +161,6 @@ const ScanUser = () => {
         type: "error",
       });
 
-      // Reset scanning after error
       setTimeout(() => {
         setIsScanning(true);
         setMessage({ text: "", type: "" });
@@ -178,20 +177,25 @@ const ScanUser = () => {
   };
 
   return (
-    <section className="bg-gradient-to-r h-screen from-[#092068]/80 to-[#1ac4fa]/60 relative z-20 py-6 sm:py-8 lg:py-12 flex justify-center items-center">
+    <section className="bg-gradient-to-r min-h-screen from-[#092068]/80 to-[#1ac4fa]/60 relative z-20 py-6 sm:py-8 lg:py-12 flex justify-center items-center">
       <div className="w-full max-w-md px-4">
         <h2 className="text-white text-center mb-4">
           Scan QR Code to Mark Attendance
         </h2>
-        <div className="relative w-full h-[250px]">
+        <div className="relative h-[250px] w-full">
           <QrScanner
             delay={300}
             onError={handleError}
             onScan={handleScan}
             style={{
               width: "100%",
+              height: "250px",
               maxWidth: "400px",
               margin: "0 auto",
+              objectFit: "cover",
+              position: "absolute", // Add this
+              top: 0, // Add this
+              left: 0, // Add this
             }}
             constraints={{
               video: {
@@ -200,6 +204,7 @@ const ScanUser = () => {
                 height: { ideal: 720 },
               },
             }}
+            className="!h-[250px]" // Add this
           />
           {!isScanning && (
             <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
