@@ -183,7 +183,7 @@ const ScanUser = () => {
         <h2 className="text-white text-center mb-4">
           Scan QR Code to Mark Attendance
         </h2>
-        <div className="relative">
+        <div className="relative w-full h-[250px]">
           <QrScanner
             delay={300}
             onError={handleError}
