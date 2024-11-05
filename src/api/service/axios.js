@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// Create an Axios instance with default configuration
 export const customeAxios = axios.create({
   // baseURL: "https://easystockapi.scanntek.com/api",
   baseURL: "https://fluxion-cdfpcve0h5hdakc7.eastus-01.azurewebsites.net/api",
