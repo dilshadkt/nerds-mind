@@ -1,12 +1,12 @@
 import React, { useState, useRef } from "react";
 import { QrReader } from "react-qr-reader";
-import beepSound from "../../assets/beep.mp3"; // Replace with your actual file path
-import successSound from "../../assets/success.mp3"; // Replace with your actual file path
+import beepSound from "../../assets/beep.mp3";
+import successSound from "../../assets/success.mp3";
 import { customeAxios } from "../../api/service/axios";
 
 const ScanUser = () => {
   const [scanResult, setScanResult] = useState(null);
-  const lastScannedCodeRef = useRef(null); // Use ref instead of state to track last scanned code
+  const lastScannedCodeRef = useRef(null);
   const [message, setMessage] = useState({ text: "", type: "" });
 
   const checkCodeInDatabase = async (code) => {
