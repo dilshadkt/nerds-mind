@@ -1,6 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import FadeLoader from "react-spinners/FadeLoader";
-const TableRow = ({ index, row, handleStatus }) => {
+import { checkCodeInDatabase } from "../../../api/service";
+import toast from "react-hot-toast";
+const TableRow = ({
+  index,
+  row,
+  handleStatus,
+  data,
+  setData,
+  setFilteredData,
+}) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const status = ["Confirmed", "Cancelled"];
   const menuRef = useRef();
@@ -20,30 +29,43 @@ const TableRow = ({ index, row, handleStatus }) => {
     setMenuOpen(false);
     handleStatus(row.RegistrationID, status, row);
   };
+  const markPresent = async (regId) => {
+    const response = await checkCodeInDatabase(regId);
+    if (true) {
+      const filtered = data.map((data) =>
+        data.UniqueID.toString() === regId.toString()
+          ? { ...data, RegStatus: "Attended" }
+          : data
+      );
+      setFilteredData(filtered);
+      setData(filtered);
+      toast.success("Attendence marked successfully");
+    }
+  };
   return (
-    <tr className={`hover:bg-gray-200/30`} key={index}>
-      <td className="py-5 px-3 font-normal text-base border-t whitespace-nowrap">
+    <tr className={`hover:bg-gray-200/30 `} key={index}>
+      <td className="py-5 px-3 font-normal text-sm border-t whitespace-nowrap">
         {row.RegistrationID}
       </td>
-      <td className="py-5 px-3 font-normal text-base border-t whitespace-nowrap">
+      <td className="py-5 px-3 font-normal text-sm border-t whitespace-nowrap">
         {row.ParticipantName}
       </td>
-      <td className="py-5 px-3 font-normal  text-base border-t whitespace-nowrap">
+      <td className="py-5 px-3 font-normal  text-sm border-t whitespace-nowrap">
         {row.Designation}
       </td>
-      <td className="py-5 px-3 text-base font-normal border-t w-72 whitespace-normal">
+      <td className="py-5 px-3 text-sm font-normal border-t w-72 whitespace-normal">
         {row.CollegeName}
       </td>
-      <td className="py-5 px-3 text-base font-normal border-t whitespace-nowrap">
+      <td className="py-5 px-3 text-sm font-normal border-t whitespace-nowrap">
         {row.ContactNo}
       </td>
-      <td className="py-5 px-3 text-base font-normal border-t whitespace-nowrap">
+      <td className="py-5 px-3 text-sm font-normal border-t whitespace-nowrap">
         {row.EmailID}
       </td>
-      <td className="py-5 px-3 text-base font-normal border-t whitespace-nowrap">
+      <td className="py-5 px-3 text-sm font-normal border-t whitespace-nowrap">
         {row.RegistrationDate}
       </td>
-      <td className="py-5 px-3  text-base font-normal border-t whitespace-nowrap">
+      <td className="py-5 px-3  text-sm font-normal border-t whitespace-nowrap">
         {row.FoodType}
       </td>
       <td
@@ -82,6 +104,21 @@ const TableRow = ({ index, row, handleStatus }) => {
             ))}
           </ul>
         </div>
+      </td>
+      <td
+        className={`py-5 px-3 relative   text-xs font-normal border-t whitespace-nowrap`}
+      >
+        <button
+          disabled={row.RegStatus === "Attended"}
+          onClick={() => markPresent(row.UniqueID)}
+          className={`text-xs ${
+            row.RegStatus !== "Attended"
+              ? `hover:text-blue-500 hover:underline `
+              : "text-gray-400"
+          } `}
+        >
+          Mark Present
+        </button>
       </td>
     </tr>
   );

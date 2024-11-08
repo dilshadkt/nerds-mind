@@ -6,7 +6,7 @@ const StatusSelect = ({ value, onChange }) => {
       <select
         value={value}
         onChange={onChange}
-        className="block w-full p-3 text-sm text-gray-900 
+        className="block w-full p-3 text-xs md:text-sm text-gray-900 
                  border border-white/50 rounded-lg
                  bg-white/20 backdrop-blur-sm
                  appearance-none focus:outline-none

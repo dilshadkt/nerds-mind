@@ -171,3 +171,105 @@ export const getRegisterData = async () => {
     throw error;
   }
 };
+
+export const checkCodeInDatabase = async (code) => {
+  try {
+    const response = await customeAxios.post(`/postAttendance`, {
+      UniqueID: code,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error);
+    return { isSuccess: false };
+  }
+};
+
+const generatePDF = async (userData, entryPassRef) => {
+  const entryPassElement = entryPassRef.current;
+  if (!entryPassElement) {
+    console.error("Entry pass component not found");
+    return;
+  }
+
+  // Temporarily make the element visible but positioned off-screen
+  const originalStyle = entryPassElement.style.cssText;
+  entryPassElement.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: -9999px;
+      width: 1024px;
+      height: auto;
+      visibility: visible;
+      display: block;
+      background: white;
+      margin: 0;
+      padding: 0;
+    `;
+
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    const canvas = await html2canvas(entryPassElement, {
+      useCORS: true,
+      scale: 2,
+      backgroundColor: "#ffffff",
+      logging: false,
+      windowWidth: 1024,
+      onclone: (clonedDoc) => {
+        const clonedElement = clonedDoc.getElementById("entry-pass");
+        if (clonedElement) {
+          clonedElement.style.display = "block";
+          clonedElement.style.visibility = "visible";
+          clonedElement.style.margin = "0";
+          clonedElement.style.padding = "0";
+        }
+      },
+    });
+
+    // A4 dimensions in mm
+    const a4Width = 210;
+    const a4Height = 297;
+
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+      compress: true,
+    });
+
+    const imgRatio = canvas.width / canvas.height;
+    const pageRatio = a4Width / a4Height;
+
+    let finalWidth = a4Width;
+    let finalHeight = a4Height;
+
+    if (imgRatio > pageRatio) {
+      finalHeight = a4Width / imgRatio;
+    } else {
+      finalWidth = a4Height * imgRatio;
+    }
+
+    const xOffset = (a4Width - finalWidth) / 2;
+    const yOffset = (a4Height - finalHeight) / 2;
+
+    pdf.addImage(
+      canvas.toDataURL("image/jpeg", 1.0),
+      "JPEG",
+      xOffset,
+      yOffset,
+      finalWidth,
+      finalHeight,
+      undefined,
+      "FAST"
+    );
+
+    // Save each PDF with a unique name (e.g., using user's name or ID)
+    pdf.save(`EntryPass_${userData.ParticipantName || userData.EmailID}.pdf`);
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    throw error;
+  } finally {
+    entryPassElement.style.cssText = originalStyle;
+  }
+};
+
+export default generatePDF;

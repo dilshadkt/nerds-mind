@@ -8,6 +8,7 @@ import { customeAxios } from "../../api/service/axios";
 import toast from "react-hot-toast";
 import EntryPass from "../../components/entrypass";
 import StatusSelect from "./selectBox";
+import TableHeader from "./tableHeader";
 
 const UserData = () => {
   const [data, setData] = useState([]);
@@ -102,8 +103,8 @@ const UserData = () => {
       toast.success(error || "Failed to changes");
     }
   };
+
   const handleSearch = (e) => {
-    console.log(status);
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
     let filtered =
@@ -113,11 +114,11 @@ const UserData = () => {
             (row) =>
               (row.ParticipantName &&
                 row.ParticipantName.toLowerCase().includes(query)) ||
-              (row.CollegeName && row.CollegeName.toLowerCase().includes(query))
+              (row.CollegeName &&
+                row.CollegeName.toLowerCase().includes(query)) ||
+              (row.ContactNo && row.ContactNo.includes(query))
           );
     if (status !== "all") {
-      console.log(filtered);
-      console.log(status);
       filtered = filtered.filter(
         (item) => item.RegStatus.toLowerCase() === status.toLowerCase()
       );
@@ -189,54 +190,14 @@ const UserData = () => {
       <div className="font-montserrat bg-gradient-to-r pt-20 min-h-screen  from-[#092068]/65 to-[#1ac4fa]/60">
         <div className=" h-full flex  justify-center pt-10 pb-14 ">
           <div className="w-full  px-2">
-            <div className="grid grid-cols-2 mb-4 items-center justify-start">
-              <div>
-                <h1 className="text-xl text-gray-800 font-medium">
-                  Registered Users
-                </h1>
-              </div>
-              <div className="w-full flex items-center gap-x-3">
-                <StatusSelect value={status} onChange={handleStatusChange} />
-                <form className="w-full ">
-                  <label
-                    htmlFor="default-search"
-                    className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-                  >
-                    Search
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 start-0 flex items-center ps-5 pointer-events-none">
-                      <svg
-                        className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                        />
-                      </svg>
-                    </div>
-                    <input
-                      type="search"
-                      id="default-search"
-                      className="block w-full p-3 ps-12 text-sm focus:outline-none
-                     text-gray-900 placeholder-gray-800 border border-white/50 rounded-lg
-                      bg-white/20 backdrop-blur-sm dark:border-white/50  "
-                      value={searchQuery}
-                      placeholder="Search by name or college"
-                      onChange={handleSearch}
-                      required
-                    />
-                  </div>
-                </form>
-              </div>
-            </div>
+            <TableHeader
+              handleSearch={handleSearch}
+              handleStatusChange={handleStatusChange}
+              searchQuery={searchQuery}
+              status={status}
+              filteredData={data}
+              entryPassRef={entryPassRef}
+            />
 
             {loading ? (
               <div className="flex justify-center items-center mt-10">
@@ -247,32 +208,35 @@ const UserData = () => {
                 <table className="table-auto overflow-scroll md:overflow-auto w-full text-left font-inter border">
                   <thead className="rounded-lg text-base text-white font-semibold w-full">
                     <tr className="bg-[#222E3A]/[6%] text-black">
-                      <th className="py-3 px-3 sm:text-base  whitespace-nowrap">
+                      <th className="py-3 px-3 text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
                         Reg ID
                       </th>
-                      <th className="py-3 px-3 sm:text-base  whitespace-nowrap">
+                      <th className="py-3 px-3 text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
                         Name
                       </th>
-                      <th className="py-3 px-3  sm:text-base  whitespace-nowrap">
+                      <th className="py-3 px-3  text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
                         Designation
                       </th>
-                      <th className="py-3 px-3  sm:text-base  whitespace-nowrap">
+                      <th className="py-3 px-3  text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
                         College
                       </th>
-                      <th className="py-3 px-3  sm:text-base  whitespace-nowrap">
+                      <th className="py-3 px-3  text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
                         Contact No
                       </th>
-                      <th className="py-3 px-3  sm:text-base  whitespace-nowrap">
+                      <th className="py-3 px-3  text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
                         Email
                       </th>
-                      <th className="py-3 px-3  sm:text-base  whitespace-nowrap">
+                      <th className="py-3 px-3  text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
                         Reg Date
                       </th>
-                      <th className="py-3 px-3  sm:text-base  whitespace-nowrap">
+                      <th className="py-3 px-3  text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
                         Food Type
                       </th>
-                      <th className="py-3 px-3  sm:text-base  whitespace-nowrap">
+                      <th className="py-3 px-3  text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
                         Status
+                      </th>
+                      <th className="py-3 px-3  text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
+                        Action
                       </th>
                     </tr>
                   </thead>
@@ -282,6 +246,9 @@ const UserData = () => {
                         key={index}
                         index={index}
                         row={row}
+                        data={data}
+                        setData={setData}
+                        setFilteredData={setFilteredData}
                         handleStatus={handleStatus}
                       />
                     ))}
