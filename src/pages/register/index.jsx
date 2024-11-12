@@ -83,6 +83,7 @@ const Login = () => {
       formData.OtherName = values.CollegeID;
       formData.ContactNo = values.ContactNo.toString();
     }
+    formData.IsSpotReg = true;
 
     try {
       setLoading(true);
