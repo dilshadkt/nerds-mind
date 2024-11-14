@@ -172,6 +172,18 @@ export const getRegisterData = async () => {
   }
 };
 
+export const getFeedbackData = async () => {
+  try {
+    const response = await customeAxios.get(`/getFeedBack`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching feedback data:", error);
+    throw error;
+  }
+};
+
+
 export const checkCodeInDatabase = async (code) => {
   try {
     const response = await customeAxios.post(`/postAttendance`, {

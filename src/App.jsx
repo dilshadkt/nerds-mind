@@ -10,6 +10,7 @@ import Confirmation from "./pages/confirmation";
 import UserData from "./pages/userData";
 import { useEffect } from "react";
 import ScanUser from "./pages/scan";
+import FeedbackData from "./pages/feedbackData";
 function App() {
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -41,6 +42,7 @@ function App() {
               <Route path="/confirm" element={<Confirmation />} />
               <Route path="/user-data" element={<UserData />} />
               <Route path="/scan" element={<ScanUser />} />
+              <Route path="/feedback-data" element={<FeedbackData/>}/>
             </Route>
           </Routes>
         </Router>
