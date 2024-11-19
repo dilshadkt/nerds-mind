@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import FadeLoader from "react-spinners/FadeLoader";
 import { checkCodeInDatabase } from "../../../api/service";
+import GetAppIcon from "@mui/icons-material/GetApp";
 import toast from "react-hot-toast";
 const TableRow = ({
   index,
@@ -9,6 +9,8 @@ const TableRow = ({
   data,
   setData,
   setFilteredData,
+  handleGeneratePDF,
+  certificateSendLoading,
 }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const status = ["Confirmed", "Cancelled"];
@@ -106,7 +108,7 @@ const TableRow = ({
         </div>
       </td>
       <td
-        className={`py-5 px-3 relative   text-xs font-normal border-t whitespace-nowrap`}
+        className={`py-5 px-3 relative    text-xs font-normal border-t whitespace-nowrap`}
       >
         <button
           disabled={row.RegStatus === "Attended"}
@@ -118,6 +120,36 @@ const TableRow = ({
           } `}
         >
           Mark Present
+        </button>
+      </td>
+      <td
+        className={`py-5 px-3 relative flexStart   text-xs font-normal border-t whitespace-nowrap`}
+      >
+        {/* {row.RegStatus === "Attended" && ( */}
+        <button
+          disabled={
+            row.IsCertificateSend ||
+            certificateSendLoading === row.RegistrationID
+          }
+          onClick={() => handleGeneratePDF(row)}
+          className={`text-xs text-center w-full ${
+            row.IsCertificateSend ? `bg-gray-600` : `bg-black`
+          } 
+            font-medium text-white py-2 rounded-lg `}
+        >
+          {certificateSendLoading === row.RegistrationID
+            ? "Loading...."
+            : row.IsCertificateSend
+            ? `Issued`
+            : `Send`}
+        </button>
+        {/* )} */}
+      </td>
+      <td
+        className={`py-5 px-3 relative flexStart   text-xs font-normal border-t whitespace-nowrap`}
+      >
+        <button onClick={() => handleGeneratePDF(row, false)}>
+          <GetAppIcon fontSize="small" />
         </button>
       </td>
     </tr>

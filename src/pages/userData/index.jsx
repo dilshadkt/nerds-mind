@@ -2,13 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 import { GrFormPrevious } from "react-icons/gr";
 import { MdNavigateNext } from "react-icons/md";
 import FadeLoader from "react-spinners/FadeLoader";
-import { generateAndSendPDF, getRegisterData } from "../../api/service";
+import {
+  generateAndSendPDF,
+  generateCertificatePDF,
+  getRegisterData,
+} from "../../api/service";
 import TableRow from "./tableRow";
 import { customeAxios } from "../../api/service/axios";
 import toast from "react-hot-toast";
 import EntryPass from "../../components/entrypass";
 import StatusSelect from "./selectBox";
 import TableHeader from "./tableHeader";
+import Cirtificate from "../../components/cirtficate";
 
 const UserData = () => {
   const [data, setData] = useState([]);
@@ -19,10 +24,13 @@ const UserData = () => {
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [certificateSendLoading, setCertificateLoading] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const entryPassRef = useRef();
+  const certficateRef = useRef();
   const [registerId, setRegiterId] = useState(null);
   const [values, setValues] = useState({});
+  const [certificateValue, setCertficateValue] = useState({});
   const [status, setStatus] = useState("all");
   const updateRowsToShow = (page) => {
     const startIndex = page * rowsLimit;
@@ -186,6 +194,27 @@ const UserData = () => {
     }
   };
 
+  const handleGeneratePDF = async (userData, isSendToEmail = true) => {
+    setCertficateValue(userData);
+    if (isSendToEmail) {
+      setCertificateLoading(userData.RegistrationID);
+    }
+    try {
+      await generateCertificatePDF(
+        certficateRef,
+        userData,
+        setData,
+        setFilteredData,
+        data,
+        isSendToEmail
+      );
+    } catch (error) {
+      console.error("Failed to generate PDF:", error);
+    } finally {
+      setCertificateLoading(null);
+    }
+  };
+
   return (
     <>
       <div className="font-montserrat bg-gradient-to-r pt-20 min-h-screen  from-[#092068]/65 to-[#1ac4fa]/60">
@@ -239,6 +268,10 @@ const UserData = () => {
                       <th className="py-3 px-3  text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
                         Action
                       </th>
+                      <th className="py-3 px-3  text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap">
+                        Certificate
+                      </th>
+                      <th className="py-3 px-3  text-xs font-medium md:font-semibold sm:text-base  whitespace-nowrap"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -251,6 +284,8 @@ const UserData = () => {
                         setData={setData}
                         setFilteredData={setFilteredData}
                         handleStatus={handleStatus}
+                        handleGeneratePDF={handleGeneratePDF}
+                        certificateSendLoading={certificateSendLoading}
                       />
                     ))}
                   </tbody>
@@ -320,6 +355,21 @@ const UserData = () => {
             padding: 0,
           }}
         />
+      </div>
+      {/* Cirtficate  */}
+      <div
+        id="cirtficate"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          top: "-9999px",
+          opacity: 0,
+          pointerEvents: "none",
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        <Cirtificate ref={certficateRef} userData={certificateValue} />
       </div>
     </>
   );

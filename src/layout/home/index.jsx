@@ -6,9 +6,9 @@ import Robot from "../../components/navbar/robot";
 const HomeLayout = () => {
   return (
     <section className="font-montserrat">
-      <Navbar />
+      {/* <Navbar /> */}
       <Outlet />
-      <Robot />
+      {/* <Robot /> */}
     </section>
   );
 };
